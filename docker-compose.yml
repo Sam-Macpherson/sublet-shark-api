@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/usr/src/subletshark/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env/.dev
+  db:
+    image: postgres:13.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=shark
+      - POSTGRES_PASSWORD=shark
+      - POSTGRES_DB=subletshark
+
+volumes:
+  postgres_data:

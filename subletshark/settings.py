@@ -21,13 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+load_dotenv(dotenv_path='./.env/.dev')
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'absolutely-top-secret-do-not-use-in-production'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.getenv('DEBUG', default=0))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split(' ')
 
 
 # Application definition
@@ -79,12 +81,12 @@ WSGI_APPLICATION = 'subletshark.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'subletshark',
-        'USER': 'shark',
-        'PASSWORD': 'shark',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.getenv('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
+        'USER': os.getenv('SQL_USER', 'user'),
+        'PASSWORD': os.getenv('SQL_PASSWORD', 'password'),
+        'HOST': os.getenv('SQL_HOST', 'localhost'),
+        'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
 
@@ -124,7 +126,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-load_dotenv()
 USE_S3 = os.getenv('USE_S3') == 'TRUE'
 
 if USE_S3:
