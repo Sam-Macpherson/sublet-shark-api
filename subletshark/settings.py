@@ -35,6 +35,7 @@ ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split(' ')
 # Application definition
 
 INSTALLED_APPS = [
+    'institutions',
     'listings',
     'django.contrib.admin',
     'django.contrib.auth',
