@@ -22,6 +22,7 @@ from subletshark import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('listings/', include('listings.urls')),
+    path('institutions/', include('institutions.urls')),
     path('api-auth/',
          include('rest_framework.urls', namespace='rest_framework')),
 ]
