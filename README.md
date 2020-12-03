@@ -8,7 +8,7 @@ short-term housing for students in university towns. Sublet Shark is
 developed by students, for students, with ease-of-use in mind.
 
 #### 🎓 Emphasis on students
-Sublet shark **is**:
+Sublet Shark **is**:
 * For post-secondary students looking for short term accommodation near 
 their institution
 * For post-secondary students looking to sublet their room/apartment to 
