@@ -99,7 +99,6 @@ class ListingsViewSetTestCase(SubletSharkAPITestCase):
         super().setUp()
         self.url = reverse('listings:listings-list')
         self.client.force_authenticate(user=self.user)
-        self.url = reverse('listings:listings-list')
         self.first_listing = baker.make_recipe(
             'listings.ListingRecipe',
             start_date=datetime.date(2019, 12, 31),
