@@ -1,4 +1,4 @@
-"""Serializers for the Listings app."""
+"""Serializers for the listings app."""
 
 from rest_framework import serializers
 
