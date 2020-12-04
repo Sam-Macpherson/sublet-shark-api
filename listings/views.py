@@ -13,7 +13,3 @@ class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all().prefetch_related('images')
     serializer_class = ListingSerializer
     permission_classes = [IsAuthenticated]
-
-    def list(self, request, **kwargs):
-        serializer = ListingSerializer(self.queryset, many=True)
-        return Response(serializer.data)
