@@ -13,4 +13,4 @@ class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all().prefetch_related('images').distinct()
     serializer_class = ListingSerializer
     permission_classes = [IsAuthenticated]
-    filter_class = ListingFilter
+    filterset_class = ListingFilter
