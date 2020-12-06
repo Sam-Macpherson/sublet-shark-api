@@ -30,10 +30,10 @@ class Listing(UUIDMixin):
         help_text=_('The type of building the listing is for.')
     )
     start_date = DateField(
-        help_text=_('The first date that the subletter may move in.')
+        help_text=_('The first day that the subletter may move in.')
     )
     end_date = DateField(
-        help_text=_('The date by which the subletter must leave.')
+        help_text=_('The day by which the subletter must leave.')
     )
     address = CharField(
         max_length=255,
