@@ -28,7 +28,7 @@ jobs:
       with:
         python-version: 3.8
     - name: psycopg2 and Pillow prerequisites
-      run: sudo apt-get install python-dev zlib-dev jpeg-dev libpq-dev musl-dev
+      run: sudo apt-get install python-dev libpq-dev musl-dev
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
