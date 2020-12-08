@@ -24,12 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(dotenv_path='./.env/.dev')
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', 'super-secret-do-not-use')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.getenv('DEBUG', default=0))
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS').split(' ')
+ALLOWED_HOSTS = os.getenv(
+    'DJANGO_ALLOWED_HOSTS',
+    'localhost 127.0.0.1 [::1]'
+).split(' ')
 
 
 # Application definition
