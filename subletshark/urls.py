@@ -20,6 +20,7 @@ from django.urls import path, include
 from subletshark import settings
 
 urlpatterns = [
+    path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
     path('listings/', include('listings.urls')),
     path('institutions/', include('institutions.urls')),
