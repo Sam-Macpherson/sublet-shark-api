@@ -14,7 +14,7 @@ their institution
 * For post-secondary students looking to sublet their room/apartment to 
 another local student
 
-Sublet Shark **is not** :
+Sublet Shark **is not**:
 * For leases
 * For landlords or leasing agents, or anyone who isn't a student
 * For long-term rental arrangements
