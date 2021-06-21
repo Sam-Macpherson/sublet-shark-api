@@ -26,6 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(dotenv_path='./.env/.dev')
 
+FRONTEND_URL = os.getenv('FRONTEND_URL')
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'super-secret-do-not-use')
 
@@ -36,6 +38,14 @@ ALLOWED_HOSTS = os.getenv(
     'DJANGO_ALLOWED_HOSTS',
     'localhost 0.0.0.0 127.0.0.1 [::1]',
 ).split(' ')
+
+# Emails
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 
 # Application definition
