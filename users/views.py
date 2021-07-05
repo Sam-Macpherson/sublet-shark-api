@@ -8,7 +8,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from rest_framework.permissions import AllowAny
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.status import HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
+from rest_framework.status import HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_200_OK
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from six import text_type
@@ -36,7 +36,10 @@ class EmailVerificationView(generics.UpdateAPIView):
 
             if not token_generator.check_token(user, token):
                 # User has already used the token.
-                return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'checking token failed'})
+                return Response(
+                    status=HTTP_400_BAD_REQUEST,
+                    data={'detail': 'supplied token is either invalid or has expired'}
+                )
             if user.is_active:
                 # Do nothing?
                 return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'user already activated'})
@@ -51,6 +54,20 @@ class EmailVerificationView(generics.UpdateAPIView):
 
 class ResetPasswordView(APIView):
     permission_classes = [AllowAny, ]
+
+    def get(self, request, uidb64, token):
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+            if not password_reset_token_generator.check_token(user, token):
+                # User has already used the token.
+                return Response(
+                    status=HTTP_400_BAD_REQUEST,
+                    data={'detail': 'supplied token is either invalid or has expired.'}
+                )
+        except User.DoesNotExist:
+            return Response(status=HTTP_404_NOT_FOUND)
+        return Response(status=HTTP_200_OK)
 
     def post(self, request):
         email = request.data['email']
@@ -89,12 +106,18 @@ class ResetPasswordView(APIView):
             user = User.objects.get(pk=uid)
             if not password_reset_token_generator.check_token(user, token):
                 # User has already used the token.
-                return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'checking token failed.'})
+                return Response(
+                    status=HTTP_400_BAD_REQUEST,
+                    data={'detail': 'supplied token is either invalid or has expired.'}
+                )
             else:
                 password = request.data['password']
                 password2 = request.data['password2']
                 if password != password2:
-                    return Response(status=HTTP_400_BAD_REQUEST, data={'detail': 'passwords do not match.'})
+                    return Response(
+                        status=HTTP_400_BAD_REQUEST,
+                        data={'detail': 'passwords do not match.'}
+                    )
                 user.set_password(password)
                 user.save()
         except User.DoesNotExist:
