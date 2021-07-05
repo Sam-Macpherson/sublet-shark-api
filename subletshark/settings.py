@@ -47,6 +47,9 @@ DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
 EMAIL_PORT = 587
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
+# Number of seconds in 1 hour.
+PASSWORD_RESET_TIMEOUT = 3600
+
 
 # Application definition
 
