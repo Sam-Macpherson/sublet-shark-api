@@ -53,6 +53,8 @@ PASSWORD_RESET_TIMEOUT = 86400
 
 # Application definition
 
+AUTH_USER_MODEL = 'users.User'
+
 INSTALLED_APPS = [
     'users',
     'institutions',

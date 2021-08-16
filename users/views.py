@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from users.models import User
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
