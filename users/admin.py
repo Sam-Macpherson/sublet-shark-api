@@ -5,6 +5,7 @@ from django.contrib.auth.admin import UserAdmin
 from rest_framework_simplejwt.token_blacklist.admin import OutstandingTokenAdmin
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
 
+
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
@@ -12,13 +13,13 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('email', 'password', 'profile_picture', 'bio')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
+            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active', 'profile_picture')}
          ),
     )
     search_fields = ('email',)
