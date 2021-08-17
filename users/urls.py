@@ -6,9 +6,10 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from .views import RegisterView, BlacklistTokenView, EmailVerificationView, ResetPasswordView
+from .views import RegisterView, BlacklistTokenView, EmailVerificationView, ResetPasswordView, UserProfileView
 
 urlpatterns = [
+    path('<uid>/profile/', UserProfileView.as_view(), name='profile'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', TokenObtainPairView.as_view(), name='login'),
     path('logout/', BlacklistTokenView.as_view(), name='logout'),

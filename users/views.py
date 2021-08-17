@@ -26,6 +26,19 @@ token_generator = VerificationTokenGenerator()
 password_reset_token_generator = PasswordResetTokenGenerator()
 
 
+class UserProfileView(generics.RetrieveAPIView):
+
+    def get(self, request, uid, *args, **kwargs):
+        try:
+            if uid == 'me':
+                user = request.user
+            else:
+                user = User.objects.get(pk=uid)
+            return Response(UserSerializer(user).data)
+        except User.DoesNotExist:
+            return Response(status=HTTP_404_NOT_FOUND, data={'detail': 'user not found.'})
+
+
 class EmailVerificationView(generics.UpdateAPIView):
     permission_classes = [AllowAny, ]
 
